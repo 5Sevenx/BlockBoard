@@ -1,3 +1,0 @@
-﻿  BlockB.cpp
-C:\Users\qwert\BlockBoard\BlockBoard\BlockB.cpp(17,7): error C2082: redefinition of formal parameter 'pp'
-C:\Users\qwert\BlockBoard\BlockBoard\BlockB.cpp(63,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
