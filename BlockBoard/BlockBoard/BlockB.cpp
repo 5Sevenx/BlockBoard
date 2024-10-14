@@ -1,14 +1,17 @@
 ﻿#include <iostream>
 #include <string>
 #include <windows.h>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 HHOOK _hook;
 KBDLLHOOKSTRUCT kbdStruct;
 
-char RandomizedKey;
+char RandomKey;
 char lastKeyPressed;
-int RandomNum;
+char RandomNum;
+int ExitCount = 0;
 LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
         kbdStruct = *((KBDLLHOOKSTRUCT*)lParam);
@@ -24,13 +27,22 @@ LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
         if (wParam == WM_KEYDOWN) {
             lastKeyPressed = (char)UnicodeCharacter[0];
             cout << lastKeyPressed << " pressed Down" << endl;
-            if (UnicodeCharacter[0] != RandomizedKey)
+            if (UnicodeCharacter[0] != RandomNum && UnicodeCharacter[0] != RandomKey)
             {
                 return -1;
             }
-           
-            if (lastKeyPressed == RandomizedKey) {
-                PostQuitMessage(0);
+
+            if (lastKeyPressed == RandomKey)
+            { 
+                    ExitCount++;
+            }
+            if (lastKeyPressed == RandomNum)
+            {
+                ExitCount++;
+                if (ExitCount == 2)
+                {
+                    PostQuitMessage(0);
+                }
             }
         }
     }
@@ -49,25 +61,30 @@ int main() {
         'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
     };
 
-    const int NumArray[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 }; 
-    int RandomNum; 
+    const char NumArray[10] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+
     srand(time(0)); 
     int IntRand = rand() % 10; 
     RandomNum = NumArray[IntRand]; 
     
     srand(time(0));
     int CharRand = rand() % 26;
-    RandomizedKey = KeyCharArray[CharRand];  
-    cout << "Your Key: " << RandomizedKey <<endl << 
-        "With next number:" << RandomNum << endl
-        << "Key word: " << Alphabet[CharRand] << endl
-        << RandomizedKey << RandomNum;
+    RandomKey = KeyCharArray[CharRand];
+    cout << "Your Key: " << 
+        RandomKey <<endl <<
+        "With next number:" << 
+        RandomNum << endl
+        << "Key word: " << 
+        Alphabet[CharRand] << endl
+        << RandomKey << 
+        RandomNum << endl;
 
     
     _hook = SetWindowsHookEx(WH_KEYBOARD_LL, HookCallback, NULL, 0);
     MSG msg;
     while (GetMessage(&msg, 0, 0, 0)) {
         PeekMessage(&msg, 0, 0, 0, 0x0001);
+
     }
 
     return 0;
