@@ -3,15 +3,35 @@
 #include <windows.h>
 #include <cstdlib>
 #include <ctime>
-using namespace std;
+#include <thread>
 
+using namespace std;
 HHOOK _hook;
 KBDLLHOOKSTRUCT kbdStruct;
-
+HHOOK miHook;
 char RandomKey;
 char lastKeyPressed;
 char RandomNum;
 int ExitCount = 0;
+
+int WindowX() {
+    RECT desktop;
+    HWND hDesktop = GetDesktopWindow();
+    GetWindowRect(hDesktop, &desktop);
+    return desktop.right;
+}
+int WindowY() {
+    RECT desktop;
+    HWND hDesktop = GetDesktopWindow();
+    GetWindowRect(hDesktop, &desktop);
+    return desktop.bottom;
+}
+void BlockMouseMs() {
+    while (ExitCount < 2) {
+        SetCursorPos(WindowX() / 2, WindowY() / 2); //MouseBlock
+    }
+}
+
 LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
         kbdStruct = *((KBDLLHOOKSTRUCT*)lParam);
@@ -41,16 +61,19 @@ LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
                 ExitCount++;
                 if (ExitCount == 2)
                 {
+                    
                     PostQuitMessage(0);
                 }
             }
         }
     }
     return CallNextHookEx(_hook, nCode, wParam, lParam);
+
 }
 
+
 int main() {
-    
+    thread mouseThread(BlockMouseMs);
     const string Alphabet[26] = {
         "Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett",
         "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango",
@@ -78,14 +101,14 @@ int main() {
         Alphabet[CharRand] << endl
         << RandomKey << 
         RandomNum << endl;
+   
 
-    
     _hook = SetWindowsHookEx(WH_KEYBOARD_LL, HookCallback, NULL, 0);
     MSG msg;
     while (GetMessage(&msg, 0, 0, 0)) {
         PeekMessage(&msg, 0, 0, 0, 0x0001);
 
     }
-
+    mouseThread.join();
     return 0;
 }

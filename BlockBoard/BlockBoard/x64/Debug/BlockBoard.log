@@ -1,4 +1,4 @@
 ﻿  BlockB.cpp
-C:\Users\qwert\BlockBoard\BlockBoard\BlockB.cpp(54,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\qwert\BlockBoard\BlockBoard\BlockB.cpp(58,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  BlockBoard.vcxproj -> C:\Users\qwert\BlockBoard\x64\Debug\BlockBoard.exe
+C:\Users\alex.alyeksyeyenko\BlockBoard\BlockBoard\BlockBoard\BlockB.cpp(88,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\alex.alyeksyeyenko\BlockBoard\BlockBoard\BlockBoard\BlockB.cpp(92,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  BlockBoard.vcxproj -> C:\Users\alex.alyeksyeyenko\BlockBoard\BlockBoard\x64\Debug\BlockBoard.exe
