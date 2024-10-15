@@ -1,0 +1,8 @@
+﻿  BlockB.cpp
+C:\Users\alex.alyeksyeyenko\BlockBoard\BlockBoard\BlockBoard\BlockB.cpp(89,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\alex.alyeksyeyenko\BlockBoard\BlockBoard\BlockBoard\BlockB.cpp(93,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Generando código
+  Previous IPDB not found, fall back to full compilation.
+  All 114 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Generación de código finalizada
+  BlockBoard.vcxproj -> C:\Users\alex.alyeksyeyenko\BlockBoard\BlockBoard\x64\Release\BlockBoard.exe
