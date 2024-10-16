@@ -32,6 +32,7 @@ void BlockMouseMs() {
     }
 }
 
+
 LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
         kbdStruct = *((KBDLLHOOKSTRUCT*)lParam);
