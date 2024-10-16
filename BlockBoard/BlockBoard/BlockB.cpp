@@ -28,7 +28,7 @@ int WindowY() {
 }
 void BlockMouseMs() {
     while (ExitCount < 2) {
-        SetCursorPos(WindowX() / 2, WindowY() / 2); //MouseBlock
+        SetCursorPos(WindowX() / 2, WindowY() / 2); 
     }
 }
 
@@ -73,6 +73,7 @@ LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
 
 
 int main() {
+    srand(static_cast<unsigned int>(time(0)));
     thread mouseThread(BlockMouseMs);
     const string Alphabet[26] = {
         "Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett",
@@ -86,19 +87,16 @@ int main() {
 
     const char NumArray[10] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
 
-    srand(time(0)); 
-    int IntRand = rand() % 10; 
-    RandomNum = NumArray[IntRand]; 
+    RandomNum = NumArray[rand() % 10];
+    int SameRand = rand() % 26;
+    RandomKey = KeyCharArray[SameRand];
     
-    srand(time(0));
-    int CharRand = rand() % 26;
-    RandomKey = KeyCharArray[CharRand];
     cout << "Your Key: " << 
         RandomKey <<endl <<
         "With next number:" << 
         RandomNum << endl
         << "Key word: " << 
-        Alphabet[CharRand] << endl
+        Alphabet[SameRand] << endl
         << RandomKey << 
         RandomNum << endl;
    
