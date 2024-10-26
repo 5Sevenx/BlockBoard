@@ -34,6 +34,7 @@ void BlockMouseMs() {
 }
 
 
+
 LRESULT CALLBACK HookCallback(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0 && wParam == WM_KEYDOWN) {
         kbdStruct = *((KBDLLHOOKSTRUCT*)lParam);
@@ -81,14 +82,19 @@ int main() {
     int SameRand = rand() % 26;
     RandomKey = KeyCharArray[SameRand];
     
-    cout << "Your Key: " << 
-        RandomKey <<endl <<
-        "With next number:" << 
+    cout << "Your Key: " <<
+        RandomKey << endl <<
+        "With next number:" <<
         RandomNum << endl
-        << "Key word: " << 
+        << "Key word: " <<
         Alphabet[SameRand] << endl
-        << RandomKey << 
+        << RandomKey <<
         RandomNum << endl;
+
+    
+    ShowWindow(GetConsoleWindow(), SW_SHOW); 
+    this_thread::sleep_for(chrono::seconds(5)); 
+    ShowWindow(GetConsoleWindow(), SW_HIDE); 
    
 
     _hook = SetWindowsHookEx(WH_KEYBOARD_LL, HookCallback, NULL, 0);
