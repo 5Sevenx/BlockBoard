@@ -1,8 +1,8 @@
 # ${{\color{purple}BlockBoard}}\$
 
 ```diff
-BlockBoard is an application that gives you a random number and a random letter on your keyboard.
-After that, the keyboard and mouse are disabled(only 2 keys are not disabled — your combination).
+BlockBoard is an application that gives you a random number and a random letter on your keyboard
+After that, the keyboard and mouse are disabled(only 2 keys are not disabled — your combination)
 So you need to press the combination of the letter and the number to end the loop. 
 ```
 > [!NOTE]
