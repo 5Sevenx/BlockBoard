@@ -19,7 +19,7 @@ So you need to press the combination of the letter and the number to end the loo
 
 
 > [!WARNING]  
-> If you decide to test or modify,comment **line 29**:
+> If you decide to test or modify,comment `line 29`:
 > ```bash
 >    void BlockMouseMs() {
 >    while (ExitCount < 2) {
