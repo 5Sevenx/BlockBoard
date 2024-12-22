@@ -17,7 +17,6 @@ So you need to press the combination of the letter and the number to end the loo
 
 ----
 
-
 > [!WARNING]  
 > If you decide to test or modify,comment `line 29`:
 > ```bash
@@ -28,14 +27,3 @@ So you need to press the combination of the letter and the number to end the loo
 >    }
 >}
 > ```
-
-  
-
-
-
----
-
-> [!NOTE]
-> If you see this, it means the project is still in development, so it will receive updates in the future.Or I just forgot to delete it.
-
-
