@@ -5,15 +5,6 @@ After that, the keyboard and mouse are disabled(only 2 keys are not disabled —
 So you need to press the combination of the letter and the number to end the loop and end the execution. 
 </p>
 
----
-
-> [!IMPORTANT]
-> <h2>Availability</h2>
-> 🟢 Windows
->
-> 
-> 🔴 Linux
-
 
 ----
 
